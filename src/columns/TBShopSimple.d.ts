@@ -92,3 +92,11 @@ export type TBShopSimple = {
     "hasNext": boolean;
   }
 }
+
+type TBShopSimpleResponse = {
+  "api": string;
+  "v": string;
+  "ret": string[ ],
+  "data": TBShopSimple;
+  "traceId": string;
+}

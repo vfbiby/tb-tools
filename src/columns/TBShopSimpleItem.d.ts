@@ -6,3 +6,11 @@ export type TBShopSimpleItem = {
   "page": number;
   "pageSize": number;
 }
+
+type TBShopSimpleItemResponse = {
+  "api": string;
+  "v": string;
+  "ret": string[ ],
+  "data": TBShopSimpleItem;
+  "traceId": string;
+}
