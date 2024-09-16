@@ -2,6 +2,7 @@ import type {PlasmoCSConfig} from "plasmo"
 import {useEffect} from "react";
 import type {TBShopSimpleResponse} from "~src/columns/TBShopSimple";
 import type {TBShopSimpleItemResponse} from "~src/columns/TBShopSimpleItem";
+import {db} from "~src/lib/db";
 
 export const config: PlasmoCSConfig = {
   matches: ["*://*.taobao.com/*"],
@@ -24,10 +25,20 @@ const onMessageListener = async (e: Prettify<Event & EventAttachInfo>) => {
   const type: ApiResponseType = e.detail.type
   let response: ApiResponse;
   if (type === 'ITEM_LIST') {
-    response = JSON.parse(e.detail.responseText) as TBShopSimpleResponse;
+    response = JSON.parse(e.detail.responseText) as TBShopSimpleItemResponse;
+    const items = response.data.data;
+    items.forEach(item => {
+      item.userId = 3423424
+      item.wangwang = "wangwang"
+      console.log(item)
+      db.item.add(item);
+    })
   }
   if (type === 'SHOP_INFO') {
-    response = JSON.parse(e.detail.responseText) as TBShopSimpleItemResponse;
+    response = JSON.parse(e.detail.responseText) as TBShopSimpleResponse;
+    const shop = response.data.signInfoDTO;
+    shop.userId = 3234
+    db.shop.add(shop)
   }
   console.log(response.api)
 }
