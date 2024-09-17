@@ -96,6 +96,12 @@ export const columns: GridColDef<Item>[] = [
     },
   },
   {
+    field: 'cateId',
+    headerName: '类目',
+    width: 120,
+    editable: true,
+  },
+  {
     field: 'createdAt',
     headerName: '更新时间',
     width: 150,

@@ -40,7 +40,7 @@ export function ItemListTable() {
     }}
     columns={columns}
     pagination={true}
-    pageSizeOptions={[5, 10, 20, 50, 100, {value: 1000, label: '1千'}]}
+    pageSizeOptions={[5, 10, 20, 50, 100, 200, 500, {value: 1000, label: '1千'}]}
     checkboxSelection
     disableRowSelectionOnClick
   />
