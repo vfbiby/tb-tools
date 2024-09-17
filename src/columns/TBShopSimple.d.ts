@@ -6,6 +6,7 @@ export type Category = {
 };
 
 export type Item = {
+  createdAt: Date;
   "wangwang": string;
   "userId": number;
   "image": string;
@@ -19,6 +20,7 @@ export type Item = {
 };
 
 export type ShopDTO = {
+  createdAt: Date;
   "userId": number;
   "shopLogoUrl": string;
   "shopName": string;
