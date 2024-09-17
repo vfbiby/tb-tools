@@ -26,7 +26,7 @@ function interceptAjax() {
       if (xhr.readyState === XMLHttpRequest.DONE) {
         interceptUrls.forEach(intercept => {
           if (intercept.pattern.test(url)) {
-            sendResponseBack(intercept.type, event)
+            sendResponseBack(intercept.type, event, url)
           }
         })
       }
@@ -35,10 +35,10 @@ function interceptAjax() {
   }
 }
 
-function sendResponseBack(type: string, event: any) {
+function sendResponseBack(type: string, event: any, url: string) {
   window.dispatchEvent(
     new CustomEvent("FROM_INJECTED", {
-      detail: {type, responseText: event.target.responseText}
+      detail: {type, responseText: event.target.responseText, url}
     })
   )
 }

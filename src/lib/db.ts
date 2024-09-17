@@ -9,7 +9,7 @@ const db = new Dexie('taobao') as Dexie & {
 // Schema declaration:
 db.version(1).stores({
   shop: '++userId, shopName, wangwang', // primary key "id" (for the runtime!)
-  item: '++itemId, title, userId'
+  item: '++itemId, title, userId, cateId'
 });
 
 export {db};

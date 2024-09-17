@@ -14,7 +14,7 @@ export type Prettify<T> = {
 } & {};
 
 export type EventAttachInfo = {
-  detail: { type: 'ITEM_LIST' | 'SHOP_INFO'; responseText: string }
+  detail: { type: 'ITEM_LIST' | 'SHOP_INFO'; responseText: string; url: string }
 };
 
 export type ApiResponseType = 'ITEM_LIST' | 'SHOP_INFO';

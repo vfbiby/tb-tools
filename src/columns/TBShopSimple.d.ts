@@ -6,11 +6,12 @@ export type Category = {
 };
 
 export type Item = {
-  createdAt: Date;
+  "cateId": string;
+  "createdAt": Date;
   "wangwang": string;
-  "userId": number;
+  "userId": string;
   "image": string;
-  "itemId": number;
+  "itemId": string;
   "title": string;
   "itemUrl": string;
   "discountPrice": string;
@@ -21,7 +22,7 @@ export type Item = {
 
 export type ShopDTO = {
   createdAt: Date;
-  "userId": number;
+  "userId": string;
   "shopLogoUrl": string;
   "shopName": string;
   "bailIconUrl": string;
