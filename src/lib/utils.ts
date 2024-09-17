@@ -1,4 +1,4 @@
-import type {Item, ShopDTO, TBShopSimpleResponse} from "~src/columns/TBShopSimple";
+import type {Cate, Category, Item, ShopDTO, TBShopSimpleResponse} from "~src/columns/TBShopSimple";
 import type {TBShopSimpleItemResponse} from "~src/columns/TBShopSimpleItem";
 import {db} from "~src/lib/db";
 import {type ApiResponse, type ApiResponseType, type EventAttachInfo, type Prettify} from "~src/contents/tb-shop-float";
@@ -35,7 +35,6 @@ function attachDateUserIdInfoTo(shop: ShopDTO) {
 
 function assignCateIdUserId(url: string) {
   const params = decodeURIComponent((url.match(/data=(.*)(?=&|$)/))[1]);
-  console.log(params)
   if (!params) throw new Error('ajax url has no data params!')
   const dataParamsObj: DataParams = JSON.parse(params);
   userId = dataParamsObj.sellerId
@@ -65,6 +64,36 @@ async function checkCateIdAndUpdate(items: Item[]) {
   }
 }
 
+function makeCategories(cates: Cate[], userId: string) {
+  if (!userId) throw new Error('make category error on userId missing!')
+  const categories: Category[] | null = [];
+  cates.forEach(cate => {
+    const category: Category = {
+      categoryId: cate.categoryId,
+      categoryName: cate.categoryName,
+      userId: userId,
+      createdAt: new Date()
+    };
+    categories.push(category)
+    cate?.subCategoryInfoList?.forEach(subCate => {
+      const subCategory: Category = {
+        categoryId: subCate.categoryId,
+        categoryName: subCate.categoryName,
+        parentCategory: category.categoryId,
+        userId: userId,
+        createdAt: new Date()
+      };
+      categories.push(subCategory)
+    })
+  })
+  return categories;
+}
+
+function makeCategoriesAndSave(cates: Cate[]) {
+  const categories = makeCategories(cates, userId);
+  db.category.bulkAdd(categories)
+}
+
 export const onMessageListener = async (e: Prettify<Event & EventAttachInfo>) => {
   const type: ApiResponseType = e.detail.type
   const url: string = e.detail.url
@@ -80,6 +109,8 @@ export const onMessageListener = async (e: Prettify<Event & EventAttachInfo>) =>
     response = JSON.parse(e.detail.responseText) as TBShopSimpleResponse;
     const shop = response.data.signInfoDTO;
     assignUserIdWangwang(shop, url);
+    const cates = response.data.categoryInfoDTOList;
+    makeCategoriesAndSave(cates);
     attachDateUserIdInfoTo(shop);
     db.shop.put(shop)
     let items = response.data.itemInfoDTO.data;

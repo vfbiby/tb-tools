@@ -1,8 +1,16 @@
-export type Category = {
+type Category = {
+  userId: string;
+  categoryId: number;
+  categoryName: string;
+  parentCategory?: number;
+  createdAt: Date;
+}
+
+export type Cate = {
   "categoryId": number;
   "categoryName": string;
   "customDecorate": boolean;
-  "subCategoryInfoList": Category[]
+  "subCategoryInfoList": Cate[]
 };
 
 export type Item = {
@@ -92,7 +100,7 @@ export type TBShopSimple = {
     "member": false,
     "buyerAvatarUrl": string;
   },
-  "categoryInfoDTOList": Category[],
+  "categoryInfoDTOList": Cate[],
   "itemInfoDTO": {
     "totalCnt": number;
     "data": Item[],
