@@ -64,14 +64,14 @@ async function checkCateIdAndUpdate(items: Item[]) {
   }
 }
 
-function makeCategories(cates: Cate[], userId: string) {
-  if (!userId) throw new Error('make category error on userId missing!')
+function makeCategories(cates: Cate[], sellerId: string) {
+  if (!sellerId) throw new Error('make category error on sellerId missing!')
   const categories: Category[] | null = [];
   cates.forEach(cate => {
     const category: Category = {
       categoryId: cate.categoryId,
       categoryName: cate.categoryName,
-      sellerId: userId,
+      sellerId: sellerId,
       createdAt: new Date()
     };
     categories.push(category)
@@ -80,7 +80,7 @@ function makeCategories(cates: Cate[], userId: string) {
         categoryId: subCate.categoryId,
         categoryName: subCate.categoryName,
         parentCategory: category.categoryId,
-        sellerId: userId,
+        sellerId: sellerId,
         createdAt: new Date()
       };
       categories.push(subCategory)
