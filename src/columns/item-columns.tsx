@@ -56,7 +56,7 @@ export const columns: GridColDef<Item>[] = [
     headerName: '店铺名',
     width: 120,
     editable: true,
-    valueFormatter: (value?: ShopDTO) => {
+    valueGetter: (value?: ShopDTO) => {
       return value?.shopName
     }
   },
@@ -103,7 +103,7 @@ export const columns: GridColDef<Item>[] = [
     headerName: '类目',
     width: 120,
     editable: true,
-    valueFormatter: (value?: Category) => {
+    valueGetter: (value?: Category) => {
       return value?.categoryName
     }
   },
