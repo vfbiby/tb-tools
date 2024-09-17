@@ -1,5 +1,5 @@
 import type {GridColDef, GridRenderCellParams} from "@mui/x-data-grid-premium";
-import type {Item, ShopDTO} from "~src/columns/TBShopSimple";
+import type {Category, Item, ShopDTO} from "~src/columns/TBShopSimple";
 import React, {useState} from "react";
 import {Box, Fade, Modal} from "@mui/material";
 
@@ -99,10 +99,13 @@ export const columns: GridColDef<Item>[] = [
     },
   },
   {
-    field: 'cateId',
+    field: 'category',
     headerName: '类目',
     width: 120,
     editable: true,
+    valueFormatter: (value?: Category) => {
+      return value?.categoryName
+    }
   },
   {
     field: 'createdAt',

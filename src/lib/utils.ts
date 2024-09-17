@@ -69,7 +69,7 @@ function makeCategories(cates: Cate[], userId: string) {
   const categories: Category[] | null = [];
   cates.forEach(cate => {
     const category: Category = {
-      categoryId: cate.categoryId,
+      categoryId: cate.categoryId.toString(),
       categoryName: cate.categoryName,
       userId: userId,
       createdAt: new Date()
@@ -77,7 +77,7 @@ function makeCategories(cates: Cate[], userId: string) {
     categories.push(category)
     cate?.subCategoryInfoList?.forEach(subCate => {
       const subCategory: Category = {
-        categoryId: subCate.categoryId,
+        categoryId: subCate.categoryId.toString(),
         categoryName: subCate.categoryName,
         parentCategory: category.categoryId,
         userId: userId,

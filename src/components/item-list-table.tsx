@@ -7,10 +7,11 @@ import {db} from "~src/lib/db";
 import type {Item} from "~src/columns/TBShopSimple";
 
 async function getItems() {
-  const items = await db.item.toArray();
+  const items: Item[] = await db.item.toArray();
   await Promise.all(items.map(async item => {
-    [item.shop] = await Promise.all([
-      db.shop.get(item.userId)
+    [item.shop, item.category] = await Promise.all([
+      db.shop.get(item.userId),
+      db.category.get(item.cateId)
     ])
   }))
   return items;

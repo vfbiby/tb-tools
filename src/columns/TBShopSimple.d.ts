@@ -1,8 +1,8 @@
 type Category = {
   userId: string;
-  categoryId: number;
+  categoryId: string;
   categoryName: string;
-  parentCategory?: number;
+  parentCategory?: string;
   createdAt: Date;
 }
 
@@ -14,6 +14,7 @@ export type Cate = {
 };
 
 export type Item = {
+  category: Category;
   "shop": ShopDTO;
   "cateId": string;
   "createdAt": Date;
