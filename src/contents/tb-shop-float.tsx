@@ -35,7 +35,7 @@ const TestPage = () => {
     }
   }, [])
 
-  return <div style={{top: '220px', left: '20px', position: 'relative'}}>
+  return <div style={{top: '220px', left: '20px', position: 'fixed'}}>
     {!drawerOpen && <button onClick={() => setDrawerOpen(true)} style={{padding: "2px 4px"}}>show</button>}
     <Drawer
       anchor="bottom"

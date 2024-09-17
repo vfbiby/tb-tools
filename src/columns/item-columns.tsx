@@ -1,7 +1,7 @@
 import type {GridColDef, GridRenderCellParams} from "@mui/x-data-grid-premium";
 import type {Item} from "~src/columns/TBShopSimple";
-import React from "react";
-import {Avatar, Box} from "@mui/material";
+import React, {useState} from "react";
+import {Box, Fade, Modal} from "@mui/material";
 
 export const dateValueFormatter = (value: string) => {
   return new Date(value).toLocaleString("zh-CN")
@@ -14,10 +14,38 @@ export const linkRender = (params: GridRenderCellParams<any, string>) => {
 export const imageRender = (params: GridRenderCellParams<any, string>) => {
   return <Box
     sx={{display: 'flex', height: '100%', direction: 'column', alignItems: 'center', justifyContent: 'center'}}>
-    <Avatar sx={{height: 56, width: 56}} alt="item image" variant="square"
-            src={`${params.value.trim()}_q80.jpg_.webp`}/>
+    <ImagePreview src={params.value.trim()}/>
   </Box>
 };
+
+const ImagePreview = ({src, alt}: { src: string, alt?: string }) => {
+  const [open, setOpen] = useState(false)
+
+  const handleClose = () => {
+    setOpen(false)
+  };
+
+  const defaultAlt = alt ? alt : 'image';
+
+  return (
+    <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center', height: "100vh"}}>
+      {!open &&
+        <img style={{maxWidth: 56, maxHeight: 56}} onClick={() => setOpen(true)} src={`${src}_q80.jpg_.webp`}
+             alt={`${defaultAlt}`}/>}
+      <Modal
+        style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Fade in={open} timeout={500}>
+          <img style={{maxWidth: '80%', maxHeight: '80%'}} src={`${src}_q80.jpg_.webp`} alt={`${defaultAlt}`}/>
+        </Fade>
+      </Modal>
+    </Box>
+  )
+}
 
 export const columns: GridColDef<Item>[] = [
   {
