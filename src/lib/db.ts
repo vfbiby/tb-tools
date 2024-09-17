@@ -2,8 +2,8 @@ import Dexie, {type EntityTable} from 'dexie';
 import type {Category, Item, ShopDTO} from "~src/columns/TBShopSimple";
 
 const db = new Dexie('taobao') as Dexie & {
-  shop: EntityTable<ShopDTO, 'userId'>,
-  item: EntityTable<Item, 'userId'>,
+  shop: EntityTable<ShopDTO, 'sellerId'>,
+  item: EntityTable<Item, 'itemId'>,
   category: EntityTable<Category, 'categoryId'>,
 };
 

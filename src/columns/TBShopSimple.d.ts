@@ -1,8 +1,8 @@
 type Category = {
-  userId: string;
-  categoryId: string;
+  sellerId: string;
+  categoryId: number;
   categoryName: string;
-  parentCategory?: string;
+  parentCategory?: number;
   createdAt: Date;
 }
 
@@ -14,14 +14,14 @@ export type Cate = {
 };
 
 export type Item = {
-  category: Category;
+  "category": Category;
   "shop": ShopDTO;
-  "cateId": string;
+  "cateId": number;
   "createdAt": Date;
   "wangwang": string;
-  "userId": string;
+  "sellerId": string;
   "image": string;
-  "itemId": string;
+  "itemId": number;
   "title": string;
   "itemUrl": string;
   "discountPrice": string;
@@ -32,7 +32,7 @@ export type Item = {
 
 export type ShopDTO = {
   createdAt: Date;
-  "userId": string;
+  "sellerId": string;
   "shopLogoUrl": string;
   "shopName": string;
   "bailIconUrl": string;

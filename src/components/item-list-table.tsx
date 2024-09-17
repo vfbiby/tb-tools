@@ -1,8 +1,7 @@
-import {useEffect, useState} from "react";
+import {type Dispatch, type SetStateAction, useEffect, useState} from "react";
 import {DataGridPremium, type GridRowSelectionModel, GridToolbar} from "@mui/x-data-grid-premium";
 import {zhCN} from "~src/components/zh-CN";
 import {columns} from "~src/columns/item-columns";
-import {useLiveQuery} from "dexie-react-hooks/src";
 import {db} from "~src/lib/db";
 import type {Item} from "~src/columns/TBShopSimple";
 
@@ -10,14 +9,14 @@ async function getItems() {
   const items: Item[] = await db.item.toArray();
   await Promise.all(items.map(async item => {
     [item.shop, item.category] = await Promise.all([
-      db.shop.get(item.userId),
+      db.shop.get(item.sellerId),
       db.category.get(item.cateId)
     ])
   }))
   return items;
 }
 
-function getItemsAndSave(setItems: (value: (((prevState: Item[]) => Item[]) | Item[])) => void) {
+function getItemsAndSave(setItems: Dispatch<SetStateAction<Item[]>>) {
   getItems().then(data => {
     setItems(data)
   })
@@ -26,7 +25,6 @@ function getItemsAndSave(setItems: (value: (((prevState: Item[]) => Item[]) | It
 export function ItemListTable() {
   const [rowSelectionModel, setRowSelectionModel] = useState<GridRowSelectionModel>([])
   const [items, setItems] = useState<Item[]>([])
-  const dbItems = useLiveQuery(() => db.item.toArray());
 
   useEffect(() => {
     getItemsAndSave(setItems);
