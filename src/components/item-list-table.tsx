@@ -6,15 +6,29 @@ import {useLiveQuery} from "dexie-react-hooks/src";
 import {db} from "~src/lib/db";
 import type {Item} from "~src/columns/TBShopSimple";
 
+async function getItems() {
+  const items = await db.item.toArray();
+  await Promise.all(items.map(async item => {
+    [item.shop] = await Promise.all([
+      db.shop.get(item.userId)
+    ])
+  }))
+  return items;
+}
+
+function getItemsAndSave(setItems: (value: (((prevState: Item[]) => Item[]) | Item[])) => void) {
+  getItems().then(data => {
+    setItems(data)
+  })
+}
+
 export function ItemListTable() {
   const [rowSelectionModel, setRowSelectionModel] = useState<GridRowSelectionModel>([])
   const [items, setItems] = useState<Item[]>([])
   const dbItems = useLiveQuery(() => db.item.toArray());
 
   useEffect(() => {
-    db.item.toArray().then(data => {
-      setItems(data)
-    })
+    getItemsAndSave(setItems);
   }, []);
 
   return <DataGridPremium

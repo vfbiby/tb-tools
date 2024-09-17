@@ -6,6 +6,7 @@ export type Category = {
 };
 
 export type Item = {
+  "shop": ShopDTO;
   "cateId": string;
   "createdAt": Date;
   "wangwang": string;

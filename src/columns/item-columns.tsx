@@ -1,5 +1,5 @@
 import type {GridColDef, GridRenderCellParams} from "@mui/x-data-grid-premium";
-import type {Item} from "~src/columns/TBShopSimple";
+import type {Item, ShopDTO} from "~src/columns/TBShopSimple";
 import React, {useState} from "react";
 import {Box, Fade, Modal} from "@mui/material";
 
@@ -52,10 +52,13 @@ export const columns: GridColDef<Item>[] = [
     field: 'itemId', headerName: '商品ID', width: 120,
   },
   {
-    field: 'name',
+    field: 'shop',
     headerName: '店铺名',
     width: 120,
     editable: true,
+    valueFormatter: (value?: ShopDTO) => {
+      return value?.shopName
+    }
   },
   {
     field: 'title',
