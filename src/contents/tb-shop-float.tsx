@@ -9,7 +9,7 @@ import {LicenseInfo} from "@mui/x-license-pro";
 
 export const config: PlasmoCSConfig = {
   matches: ["*://*.taobao.com/*"],
-  world: "MAIN"
+  // world: "MAIN"
 }
 
 export type Prettify<T> = {

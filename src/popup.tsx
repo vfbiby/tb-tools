@@ -16,7 +16,7 @@ function IndexPopup() {
         </a>{" "}
         Extension!
       </h2>
-      <Button>Goods</Button>
+      <Button>Hello</Button>
       <input onChange={(e) => setData(e.target.value)} value={data} />
       <a href="https://docs.plasmo.com" target="_blank">
         View Docs
