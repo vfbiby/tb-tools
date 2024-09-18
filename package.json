@@ -10,6 +10,13 @@
     "package": "plasmo package"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.0",
+    "@mui/lab": "6.0.0-beta.9",
+    "@mui/material": "^5.16.7",
+    "@mui/x-data-grid-premium": "^7.17.0",
+    "@mui/x-license-pro": "^6.10.2",
     "plasmo": "0.89.2",
     "react": "18.2.0",
     "react-dom": "18.2.0"

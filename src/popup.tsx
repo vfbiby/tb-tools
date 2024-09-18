@@ -1,4 +1,5 @@
 import { useState } from "react"
+import {Button} from "@mui/material";
 
 function IndexPopup() {
   const [data, setData] = useState("")
@@ -15,6 +16,7 @@ function IndexPopup() {
         </a>{" "}
         Extension!
       </h2>
+      <Button>Hello</Button>
       <input onChange={(e) => setData(e.target.value)} value={data} />
       <a href="https://docs.plasmo.com" target="_blank">
         View Docs

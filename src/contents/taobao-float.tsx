@@ -5,7 +5,9 @@ export const config: PlasmoCSConfig = {
 }
 
 const TaobaoFloat = () => {
-  return <div>hello james</div>
+  return <div>
+    <button>goo</button>
+  </div>
 }
 
 export default TaobaoFloat
