@@ -63,6 +63,7 @@ export const columns: GridColDef<Item>[] = [
   {
     field: 'title',
     headerName: '标题',
+    type: 'string',
     width: 220,
     editable: true,
   },
@@ -89,6 +90,7 @@ export const columns: GridColDef<Item>[] = [
   {
     field: 'vagueSold365',
     headerName: '总销量',
+    type: 'number',
     width: 120,
     editable: true,
     valueGetter: (value: string) => {
