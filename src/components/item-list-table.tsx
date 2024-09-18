@@ -12,9 +12,10 @@ import {db} from "~src/lib/db";
 import type {Item} from "~src/columns/TBShopSimple";
 import {newDb} from "~src/lib/newDb";
 import {EmailAddress} from "~src/lib/model";
-import {Button} from "@mui/material";
+import {Box, Button} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {red} from "@mui/material/colors";
+import TuneIcon from '@mui/icons-material/Tune';
 
 async function getItems() {
   const items: Item[] = await db.item.toArray();
@@ -80,7 +81,7 @@ export function ItemListTable() {
 
   useEffect(() => {
     getItemsAndSetState(setItems);
-    newDb.emails.add(new EmailAddress(crypto.randomUUID(), 'dfw', '759965663@qq.com'))
+    // newDb.emails.add(new EmailAddress(crypto.randomUUID(), 'dfw', '759965663@qq.com'))
     newDb.emails.toArray().then(emails => {
       console.log(emails)
     })
@@ -89,10 +90,14 @@ export function ItemListTable() {
   const ConstructToolbar = useCallback(() => {
     const tables = 'ITEM';
     const handleOnClick = () => handleDelete(tables, rowSelectionModel, () => getItemsAndSetState(setItems));
+    const otherButtons = <Box>
+      <DeleteButton onClick={handleOnClick} selectedRows={rowSelectionModel}/>
+      <Button onClick={() => setHeaderFilterOpen(!headerFilterOpen)} startIcon={<TuneIcon/>}>表头筛选</Button>
+    </Box>;
     return (
-      <CustomToolbar otherButtons={<DeleteButton onClick={handleOnClick} selectedRows={rowSelectionModel}/>}/>
+      <CustomToolbar otherButtons={otherButtons}/>
     )
-  }, [rowSelectionModel]);
+  }, [rowSelectionModel, headerFilterOpen]);
 
   return <DataGridPremium
     onRowSelectionModelChange={(newRowSelectionModel) => {

@@ -96,6 +96,7 @@ function makeCategoriesAndSave(cates: Cate[]) {
 }
 
 export const onMessageListener = async (e: Prettify<Event & EventAttachInfo>) => {
+  console.log(`receive message with ${e.detail.type} and url ${e.detail.url}`)
   const type: ApiResponseType = e.detail.type
   const url: string = e.detail.url
   let response: ApiResponse;
