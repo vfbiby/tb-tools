@@ -10,13 +10,13 @@
     "package": "plasmo package"
   },
   "dependencies": {
-    "dexie": "^4.0.8",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
-    "@mui/icons-material": "^6.1.0",
+    "@mui/icons-material": "^5.16.7",
     "@mui/material": "^5.16.7",
     "@mui/x-data-grid-premium": "^7.17.0",
     "@mui/x-license-pro": "^6.10.2",
+    "dexie": "^4.0.8",
     "plasmo": "0.89.2",
     "react": "18.2.0",
     "react-dom": "18.2.0"
