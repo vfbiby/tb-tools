@@ -72,6 +72,7 @@ export const columns: GridColDef<Item>[] = [
     headerName: '图片',
     width: 110,
     editable: true,
+    sortable: false,
     renderCell: imageRender
   },
   {
