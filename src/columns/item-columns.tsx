@@ -112,6 +112,7 @@ export const columns: GridColDef<Item>[] = [
   {
     field: 'createdAt',
     headerName: '更新时间',
+    type: 'date',
     width: 150,
     editable: true,
     valueFormatter: dateValueFormatter
