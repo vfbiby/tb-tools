@@ -4,6 +4,8 @@ import {zhCN} from "~src/components/zh-CN";
 import {columns} from "~src/columns/item-columns";
 import {db} from "~src/lib/db";
 import type {Item} from "~src/columns/TBShopSimple";
+import {newDb} from "~src/lib/newDb";
+import {EmailAddress} from "~src/lib/model";
 
 async function getItems() {
   const items: Item[] = await db.item.toArray();
@@ -28,6 +30,10 @@ export function ItemListTable() {
 
   useEffect(() => {
     getItemsAndSave(setItems);
+    newDb.emails.add(new EmailAddress(crypto.randomUUID(), 'dfw', '759965663@qq.com'))
+    newDb.emails.toArray().then(emails => {
+      console.log(emails)
+    })
   }, []);
 
   return <DataGridPremium
