@@ -84,6 +84,7 @@ export const columns: GridColDef<Item>[] = [
   {
     field: 'discountPrice',
     headerName: '折后价',
+    type: 'number',
     width: 120,
     editable: true,
   },
